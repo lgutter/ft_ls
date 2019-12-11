@@ -8,25 +8,28 @@ i=0
 failed=0
 
 if [ -f testresults.txt ]; then
+	if [[ "$1" == "-y" ]]; then
+		CONFIRM="y"
+	fi
 	while [[ $CONFIRM != "y" && $CONFIRM != "n" ]]; do
-		printf "\033[38;5;202mtestresults.txt already exists! overwrite?\033[0;0;00m y/n\n"
+		printf "\033[38;5;215mtestresults.txt already exists! overwrite?\033[0;0;00m y/n\n"
 		read CONFIRM
 	done
 	if [[ "$CONFIRM" == "n" ]]; then
 		printf "\033[38;5;140mAborting!\n\033[0;0;00m"
 		exit 1
-	else
-		printf "\033[38;5;140mOverwriting testresults.txt\n\033[0;0;00m"
-		rm -f testresults.txt
 	fi
 fi
-touch testresults.txt
 
 for test in "${TESTS[@]}"; do
 	i=$((i + 1))
-	REAL=$(ls $test 2>realerror)
+	REAL=$(ls -1 $test 2>realerror)
 	FAKE=$(./ft_ls $test 2>fakeerror)
 	if [[ "$REAL" != "$FAKE" ]]; then
+		if [ -f testresults.txt ] && [[ "$failed" == "0" ]]; then
+			echo "" > testresults.txt
+			printf "\033[38;5;215mOverwriting testresults.txt\n\033[0;0;00m"
+		fi
 		failed=$((failed + 1))
 		printf "}------------------------------------------------------------------------------{\n" >> testresults.txt
 		printf "Test %i input: ft_ls %s\n\nOutput of ls:\n˜˜˜\n%s\n˜˜˜\nOutput of ft_ls:\n˜˜˜\n%s\n˜˜˜\n" $i "$test" "$REAL" "$FAKE" >> testresults.txt
@@ -37,6 +40,10 @@ for test in "${TESTS[@]}"; do
 		fi
 	else
 		if [[ -n "$(cat realerror)" || -n "$(cat fakeerror)" ]] && [[ -n "$(diff realerror fakeerror)" ]]; then
+			if [ -f testresults.txt ] && [[ "$failed" == "0" ]]; then
+				echo "" > testresults.txt
+				printf "\033[38;5;215mOverwriting testresults.txt\n\033[0;0;00m"
+			fi
 			failed=$((failed + 1))
 			printf "}------------------------------------------------------------------------------{\n" >> testresults.txt
 			printf "Test %i input: ft_ls %s\n\nError output of ls:\n˜˜˜\n%s\n˜˜˜\nError output of ft_ls:\n%s\n˜˜˜\n" $i "$test" "$(cat realerror)" "$(cat fakeerror)" >> testresults.txt
