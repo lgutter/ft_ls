@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/11 14:05:08 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/11 14:27:31 by lgutter       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ TESTOBJECTS := $(TESTSOURCES:%= test_files/%.o)
 COVJUNK += $(TESTSOURCES:%= test_files/%.gcno)
 
 LIBRARY = -lftprintf
-export LIBRARY_PATH=$(PWD)/criterion:$(PWD)/ft_printf
-export CPATH=$(PWD):$(PWD)/ft_printf
+export LIBRARY_PATH=$(HOME)/.brew/lib:$(PWD)/ft_printf
+export CPATH=$(HOME)/.brew/include:$(PWD):$(PWD)/ft_printf
 HEADER := ft_ls.h
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -g
@@ -50,16 +50,13 @@ C_LINES = \033[38;5;250m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJECTS) $(HEADER)
+$(NAME): $(OBJECTS) $(HEADER)
 	@$(MAKE) norm
+	@$(MAKE) -C ft_printf/
 	@$(CC) $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_LS)ft_ls has been compiled$(C_RESET)"
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
-
-$(LIBFT):
-	 @$(MAKE) -C ft_printf/
-
 
 %.o: %.c
 	@$(CC) -c $< $(CFLAGS) -o $@
