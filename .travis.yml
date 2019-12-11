@@ -9,8 +9,7 @@ branches:
     only:
         - master
 install:
-    - brew install snaipe/soft/criterion
-    - git clone https://github.com/thijsdejong/codam-norminette-plus ~/norminette+
+    - git clone --depth=1 https://github.com/thijsdejong/codam-norminette-plus ~/norminette+
 before_script:
     - make test COV=1
 script:

@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/11 13:37:11 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/11 14:05:08 by lgutter       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ TESTOBJECTS := $(TESTSOURCES:%= test_files/%.o)
 COVJUNK += $(TESTSOURCES:%= test_files/%.gcno)
 
 LIBRARY = -lftprintf
-export LIBRARY_PATH=$(HOME)/.brew/lib:$(PWD)/ft_printf
-export CPATH=$(HOME)/.brew/include:$(PWD):$(PWD)/ft_printf
+export LIBRARY_PATH=$(PWD)/criterion:$(PWD)/ft_printf
+export CPATH=$(PWD):$(PWD)/ft_printf
 HEADER := ft_ls.h
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -g
