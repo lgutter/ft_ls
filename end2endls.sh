@@ -49,6 +49,8 @@ for test in "${TESTS[@]}"; do
 done
 if [[ "$failed" != "0" ]]; then
 	printf "\n\033[38;5;140mTests completed, \033[38;5;202mfailed %i out of %i tests.\033[38;5;140m for exact output of failed tests, see testresults.txt.\033[0;00m\n" $failed $i
+	exit 0
 else
 	printf "\n\033[38;5;140mTests completed, \033[38;5;41mall %i tests passed!\033[0;00m\n" $i
+	exit 1
 fi

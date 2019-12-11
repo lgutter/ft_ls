@@ -2,7 +2,4 @@ hello
 this
 is
 a
-simple
-test
-ft_printf
--laR ft_printf
+testtt
