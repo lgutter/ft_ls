@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/13 13:55:56 by ivan-tey      ########   odam.nl          #
+#    Updated: 2019/12/13 16:56:18 by lgutter       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ ifdef COV
 	CFLAGS += -coverage
 endif
 
-LIBFT := ft_printf/libftprinft.a
+LIBFT := ft_printf/libftprintf.a
 
 NAME := ft_ls
 
@@ -51,13 +51,15 @@ C_LINES = \033[38;5;250m
 
 all: $(NAME)
 
-$(NAME): $(MAIN) $(OBJECTS) $(HEADER)
-	@$(MAKE) norm
-	@$(MAKE) -C ft_printf/
+$(NAME): $(MAIN) $(OBJECTS) $(HEADER) $(LIBFT)
+	@#$(MAKE) norm
 	@$(CC) $(MAIN) $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_LS)ft_ls has been compiled$(C_RESET)"
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
+
+$(LIBFT): FORCE
+	@$(MAKE) -C ft_printf/
 
 %.o: %.c
 	@$(CC) -c $< $(CFLAGS) -o $@
@@ -93,4 +95,6 @@ fclean: oclean
 
 re: fclean all
 
-.PHONY: all norm gcov clean oclean fclean re
+FORCE:
+
+.PHONY: all norm gcov clean oclean fclean re FORCE
