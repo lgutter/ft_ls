@@ -5,3 +5,11 @@ a
 testtt
 ft_printff
 -laj
+-Eaj
+-jls
+-Jal
+-Eaj source_files/main.c
+-jls ft_printf
+-Jal bla bla
+@
+-l -j
