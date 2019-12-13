@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   stupidtest.c                                       :+:    :+:            */
+/*   ft_find_options_tests.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/11 13:25:59 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/13 12:12:42 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/13 12:20:50 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/13 12:27:46 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <criterion/criterion.h>
-#include <criterion/redirect.h>
 #include "ft_ls.h"
 
-
-static void redirect_std_out(void)
+Test(ft_find_options_tests, all_options_in_single_arg)
 {
-    cr_redirect_stdout();
-}
+	int argc = 2;
+	char **argv = (char **)malloc(sizeof(char *) * argc);
+	t_options options;
+	t_options expected;
 
-Test(stupid, very_stupid_test_1, .init = redirect_std_out)
-{
-	ft_dprintf(1, "hoi!");
-	fflush(stdout);
+	argv[0] = "test";
+	argv[1] = "-artlR";
+	ft_find_options(argc, argv, &options);
 
-	cr_assert_stdout_eq_str("hoi!");
+	expected = (e_oa | e_or | e_ot | e_ol | e_oR);
+	cr_assert_eq(options, expected);
 }

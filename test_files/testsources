@@ -1,1 +1,2 @@
-TESTSOURCES := stupidtest \
+TESTSOURCES := ft_find_options_tests\
+ft_print_error_tests\
