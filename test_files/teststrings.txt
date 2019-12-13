@@ -13,3 +13,8 @@ ft_printff
 -Jal bla bla
 @
 -l -j
+-l lwrgjh
+-lraRt hello
+-a -- -l hello
+-- -l hello
+-a -l hello
