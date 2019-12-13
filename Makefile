@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/11 14:27:31 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/13 12:14:59 by lgutter       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ include test_files/testsources
 JUNK := **/*~ **/\#*\# **/.DS_Store
 COVJUNK := **/*.gcov **/*.gcda *.gcov *.gcda
 
+MAIN := source_files/main.o
 CSOURCES := $(LSSOURCES:%= source_files/%.c)
 OBJECTS := $(LSSOURCES:%= source_files/%.o)
 GCNOFILES += $(LSSOURCES:%= *.gcno)
@@ -50,10 +51,10 @@ C_LINES = \033[38;5;250m
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(HEADER)
+$(NAME): $(MAIN) $(OBJECTS) $(HEADER)
 	@$(MAKE) norm
 	@$(MAKE) -C ft_printf/
-	@$(CC) $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $@
+	@$(CC) $(MAIN) $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_LS)ft_ls has been compiled$(C_RESET)"
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
@@ -66,7 +67,7 @@ $(NAME): $(OBJECTS) $(HEADER)
 $(TEST): $(OBJECTS) $(NAME) $(TESTOBJECTS)
 	@$(MAKE) norm
 	@$(MAKE) clean
-	@$(CC) $(TESTOBJECTS) $(CFLAGS) $(LIBRARY) -lcriterion -o $@
+	@$(CC) $(OBJECTS) $(TESTOBJECTS) $(CFLAGS) $(LIBRARY) -lcriterion -o $@
 	@echo "$(C_TEST)Test program has been compiled$(C_RESET)"
 
 norm:
