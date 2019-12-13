@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   stupidtest.c                                       :+:    :+:            */
+/*   ft_print_error_tests.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/11 13:25:59 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/13 12:12:42 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/13 12:24:00 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/13 12:29:01 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include "ft_ls.h"
 
 
-static void redirect_std_out(void)
+static void redirect_std_err(void)
 {
-    cr_redirect_stdout();
+    cr_redirect_stderr();
 }
 
-Test(stupid, very_stupid_test_1, .init = redirect_std_out)
+Test(stupid, very_stupid_test_1, .init = redirect_std_err)
 {
-	ft_dprintf(1, "hoi!");
-	fflush(stdout);
+	ft_print_error("usage", NULL);
+	fflush(stderr);
 
-	cr_assert_stdout_eq_str("hoi!");
+	cr_assert_stderr_eq_str("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n");
 }

@@ -1,1 +1,2 @@
-LSSOURCES = main
+LSSOURCES = utility_files/ft_print_error\
+find_files/ft_find_options
