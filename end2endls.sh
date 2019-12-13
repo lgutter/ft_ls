@@ -25,6 +25,8 @@ for test in "${TESTS[@]}"; do
 	i=$((i + 1))
 	REAL=$(ls -1 $test 2>realerror)
 	FAKE=$(./ft_ls $test 2>fakeerror)
+	FAKEERROR=$(cat fakeerror)
+	echo "${FAKEERROR//ft_ls/ls}" > fakeerror
 	if [[ "$REAL" != "$FAKE" ]]; then
 		if [ -f testresults.txt ] && [[ "$failed" == "0" ]]; then
 			echo "" > testresults.txt
