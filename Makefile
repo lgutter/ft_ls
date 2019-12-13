@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/13 12:14:59 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/13 13:55:56 by ivan-tey      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ $(NAME): $(MAIN) $(OBJECTS) $(HEADER)
 	@$(CC) -c $< $(CFLAGS) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_OBJECTS)$@ compiled$(C_RESET)"
+	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 
 $(TEST): $(OBJECTS) $(NAME) $(TESTOBJECTS)
 	@$(MAKE) norm
