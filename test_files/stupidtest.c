@@ -6,13 +6,14 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 13:25:59 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/11 13:29:55 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/13 12:12:42 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "ft_printf.h"
+#include "ft_ls.h"
+
 
 static void redirect_std_out(void)
 {
@@ -21,8 +22,8 @@ static void redirect_std_out(void)
 
 Test(stupid, very_stupid_test_1, .init = redirect_std_out)
 {
-	ft_printf("hoi");
+	ft_dprintf(1, "hoi!");
 	fflush(stdout);
 
-	cr_assert_stdout_eq_str("hoi");
+	cr_assert_stdout_eq_str("hoi!");
 }
