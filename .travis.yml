@@ -19,3 +19,5 @@ script:
 after_success:
     - make gcov
     - bash <(curl -s https://codecov.io/bash) -X gcov
+after_failure:
+    - cat testresults.txt
