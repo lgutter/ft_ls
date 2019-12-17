@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 18:04:22 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/13 11:53:53 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/16 17:08:53 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static int	ft_check_options(int i, char *str, t_options *options)
 	while (str[i] != '\0')
 	{
 		if (str[i] == 'l')
-			*options |= e_ol;
+			*options |= e_opt_l;
 		else if (str[i] == 'R')
-			*options |= e_oR;
+			*options |= e_opt_R;
 		else if (str[i] == 'a')
-			*options |= e_oa;
+			*options |= e_opt_a;
 		else if (str[i] == 'r')
-			*options |= e_or;
+			*options |= e_opt_r;
 		else if (str[i] == 't')
-			*options |= e_ot;
+			*options |= e_opt_t;
 		else
 		{
 			ft_print_error("option", &(str[i]));

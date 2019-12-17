@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/13 11:53:40 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/17 11:10:28 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@
 # include <grp.h>
 # include <time.h>
 # include <stdio.h>
-# include "ft_printf/ft_printf.h"
+# include <limits.h>
+# include "ft_printf.h"
 
-enum					e_options
+enum						e_options
 {
-	e_ol = 1 << 0,
-	e_oR = 1 << 1,
-	e_oa = 1 << 2,
-	e_or = 1 << 3,
-	e_ot = 1 << 4,
+	e_opt_l = 1 << 0,
+	e_opt_R = 1 << 1,
+	e_opt_a = 1 << 2,
+	e_opt_r = 1 << 3,
+	e_opt_t = 1 << 4,
 };
 
-typedef unsigned long long t_options;
+typedef unsigned long long	t_options;
 
 /*
 **	Core functions

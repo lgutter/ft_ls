@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/13 12:20:50 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/13 14:13:25 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/16 17:08:53 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Test(ft_find_options_tests, all_options_in_single_arg)
 	argv[1] = "-artlR";
 	ret = ft_find_options(argc, argv, &options);
 
-	expected = (e_oa | e_or | e_ot | e_ol | e_oR);
+	expected = (e_opt_a | e_opt_r | e_opt_t | e_opt_l | e_opt_R);
 	cr_assert_eq(ret, 2);
 	cr_assert_eq(options, expected);
 }
@@ -60,7 +60,7 @@ Test(ft_find_options_tests, all_options_in_two_args)
 	argv[2] = "-tlR";
 	ret = ft_find_options(argc, argv, &options);
 
-	expected = (e_oa | e_or | e_ot | e_ol | e_oR);
+	expected = (e_opt_a | e_opt_r | e_opt_t | e_opt_l | e_opt_R);
 	cr_assert_eq(ret, 3);
 	cr_assert_eq(options, expected);
 }
@@ -78,7 +78,7 @@ Test(ft_find_options_tests, all_options_in_two_args_duplicates)
 	argv[2] = "-talR";
 	ret = ft_find_options(argc, argv, &options);
 
-	expected = (e_oa | e_or | e_ot | e_ol | e_oR);
+	expected = (e_opt_a | e_opt_r | e_opt_t | e_opt_l | e_opt_R);
 	cr_assert_eq(ret, 3);
 	cr_assert_eq(options, expected);
 }
@@ -96,7 +96,7 @@ Test(ft_find_options_tests, only_duplicates)
 	argv[2] = "-taR";
 	ret = ft_find_options(argc, argv, &options);
 
-	expected = (e_oa | e_ot | e_oR);
+	expected = (e_opt_a | e_opt_t | e_opt_R);
 	cr_assert_eq(ret, 3);
 	cr_assert_eq(options, expected);
 }
@@ -130,7 +130,7 @@ Test(ft_find_options_tests, two_args_invalid_option_first)
 	argv[2] = "-taR";
 	close(2);
 	ret = ft_find_options(argc, argv, &options);
-	expected = (e_oa);
+	expected = (e_opt_a);
 	cr_assert_eq(ret, -1);
 	cr_assert_eq(options, expected);
 }
@@ -148,7 +148,7 @@ Test(ft_find_options_tests, two_args_invalid_option_last)
 	argv[2] = "-taRj";
 	close(2);
 	ret = ft_find_options(argc, argv, &options);
-	expected = (e_oa | e_ot | e_oR);
+	expected = (e_opt_a | e_opt_t | e_opt_R);
 	cr_assert_eq(ret, -1);
 	cr_assert_eq(options, expected);
 }
