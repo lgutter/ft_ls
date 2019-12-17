@@ -18,3 +18,10 @@ ft_printff
 -a -- -l hello
 -- -l hello
 -a -l hello
+ft_ls
+link_ls
+end2endls.sh
+README.md
+source_files/main.c
+source_files/find_files/ft_find_options.c
+-a source_files
