@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_error_free.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
+/*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/11 11:48:36 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/17 19:51:18 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/17 14:18:23 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/17 14:26:24 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int			main(int argc, char **argv)
+void	*ft_error_free(void **memory)
 {
-	int			i;
-	t_options	options;
-	int			ret;
-
-	options = 0;
-	i = 1;
-	ret = ft_find_options(argc, argv, &options);
-	if (ret == -1)
-		return (-1);
-	else
-		i = ret;
-	ft_ls(argc - i, &(argv[i]), options);
-	return (0);
+	free(*memory);
+	*memory = NULL;
+	return (NULL);
 }
