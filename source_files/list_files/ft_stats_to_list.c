@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/17 11:31:46 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/17 15:48:25 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/18 15:22:50 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,22 @@ static int			fetch_names(t_file_info *new)
 	struct group	*g_info;
 
 	p_info = getpwuid(new->stats.st_uid);
-	g_info = getgrgid(new->stats.st_gid);
-	if (p_info == NULL || g_info == NULL)
+	if (p_info == NULL)
+	{
+		if (ft_strncpy(&(new->u_name[0]),\
+			ft_itoa(new->stats.st_uid), NAME_MAX) == NULL)
+			return (-1);
+	}
+	else if (ft_strncpy(&(new->u_name[0]), p_info->pw_name, NAME_MAX) == NULL)
 		return (-1);
-	if (ft_strncpy(&(new->u_name[0]), p_info->pw_name, NAME_MAX) == NULL ||\
-	ft_strncpy(&(new->g_name[0]), g_info->gr_name, NAME_MAX) == NULL)
+	g_info = getgrgid(new->stats.st_gid);
+	if (g_info == NULL)
+	{
+		if (ft_strncpy(&(new->g_name[0]),\
+			ft_itoa(new->stats.st_gid), NAME_MAX) == NULL)
+			return (-1);
+	}
+	else if (ft_strncpy(&(new->g_name[0]), g_info->gr_name, NAME_MAX) == NULL)
 		return (-1);
 	return (0);
 }
