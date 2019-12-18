@@ -25,3 +25,8 @@ README.md
 source_files/main.c
 source_files/find_files/ft_find_options.c
 -a source_files
+source_files
+-a test_files/files_for_tests/aflie
+-a test_files/files_for_tests/linktoaflie
+-a test_files/files_for_tests/nothere
+ft_ls end2endls.h
