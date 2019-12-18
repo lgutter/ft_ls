@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/13 16:56:18 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/18 15:23:49 by lgutter       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@ include source_files/lssources
 include ft_printf/libft/covsources
 include test_files/testsources
 
-JUNK := **/*~ **/\#*\# **/.DS_Store
-COVJUNK := **/*.gcov **/*.gcda *.gcov *.gcda
+COVJUNK = $(shell find -E . -regex ".*\.gc(da|ov)" 2>/dev/null)
+JUNK = $(shell find -E . -regex ".*(\..*~|\#.*\#|\.DS_Store)" 2>/dev/null)
 
 MAIN := source_files/main.o
 CSOURCES := $(LSSOURCES:%= source_files/%.c)
 OBJECTS := $(LSSOURCES:%= source_files/%.o)
-GCNOFILES += $(LSSOURCES:%= *.gcno)
+GCNOFILES += $(LSSOURCES:%= source_files/%.gcno)
 TESTOBJECTS := $(TESTSOURCES:%= test_files/%.o)
 COVJUNK += $(TESTSOURCES:%= test_files/%.gcno)
 
@@ -84,7 +84,7 @@ clean:
 	@echo "$(C_CLEAN)Junk & coverage files removed$(C_RESET)"
 
 oclean: clean
-	@rm -rf $(OBJECTS) $(TESTOBJECTS) $(GCNOFILES)
+	@rm -rf $(OBJECTS) $(TESTOBJECTS) $(GCNOFILES) $(MAIN:%.c= %.o)
 	@echo "$(C_OLEAN)Object files removed$(C_RESET)"
 
 fclean: oclean
