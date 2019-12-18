@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/17 19:57:46 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/18 17:27:52 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <limits.h>
 # include "ft_printf.h"
 
-enum						e_options
+enum					e_options
 {
 	e_opt_l = 1 << 0,
 	e_opt_R = 1 << 1,
@@ -32,9 +32,9 @@ enum						e_options
 	e_opt_t = 1 << 4,
 };
 
-typedef unsigned long long	t_options;
+typedef unsigned long	t_options;
 
-typedef struct				s_file_info
+typedef struct			s_file_info
 {
 	struct stat			stats;
 	char				path[PATH_MAX + 1];
@@ -43,33 +43,36 @@ typedef struct				s_file_info
 	char				g_name[NAME_MAX + 1];
 	char				link_path[PATH_MAX + 1];
 	struct s_file_info	*next;
-}							t_file_info;
+}						t_file_info;
 
 /*
 **	Core functions
 */
 
-int				main(int argc, char **argv);
-int				ft_ls(int filecount, char **filenames, t_options options);
+int						main(int argc, char **argv);
+int						ft_ls(int filecount,\
+								char **filenames, t_options options);
 
 /*
 ** Find functions
 */
 
-int				ft_find_options(int argc, char **argv, t_options *options);
+int						ft_find_options(int argc,\
+										char **argv, t_options *options);
 
 /*
 ** List functions
 */
 
-t_file_info		*ft_stats_to_list(char *filename, t_file_info **list_start);
-int				ft_dir_to_list(char *dirname, t_options options);
+t_file_info				*ft_stats_to_list(char *filename,\
+										t_file_info **list_start);
+int						ft_dir_to_list(char *dirname, t_options options);
 
 /*
 **	Utility functions
 */
 
-void			ft_print_error(char *errdex, char *errstr);
-void			*ft_error_free(void **memory);
+void					ft_print_error(char *errdex, char *errstr);
+void					*ft_error_free(void **memory);
 
 #endif
