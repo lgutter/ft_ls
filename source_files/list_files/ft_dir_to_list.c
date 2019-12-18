@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 12:26:08 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/17 19:45:32 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/18 17:29:00 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		ft_dir_to_list(char *dirname, t_options options)
 	struct dirent	*direntry;
 
 	dir = opendir(dirname);
-	(void)options;
 	if (dir != NULL)
 	{
 		direntry = readdir(dir);
