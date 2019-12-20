@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/20 15:48:58 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 18:50:01 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef unsigned long	t_options;
 typedef struct			s_file_info
 {
 	struct stat			stats;
+	struct stat			lstats;
 	char				path[PATH_MAX + 1];
 	char				*name_pointer;
 	char				u_name[NAME_MAX + 1];
