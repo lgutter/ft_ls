@@ -18,6 +18,7 @@ install:
     - sudo chown 4242 /Volumes/Storage/goinfre/filewithoutuser
     - sudo chown root:4242 /Volumes/Storage/goinfre/filewithoutgroup
     - sudo chown 4242:4343 /Volumes/Storage/goinfre/filewithoutuserandgroup
+    - ls /Volumes/Storage/goinfre
 before_script:
     - make test COV=1
 script:
