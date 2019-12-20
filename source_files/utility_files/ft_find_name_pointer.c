@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_print_error.c                                   :+:    :+:            */
+/*   ft_find_name_pointer.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/13 10:43:57 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 21:56:36 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/20 12:10:58 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/20 12:47:22 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_print_error(int errnumber, char *errstr)
+char	*ft_find_name_pointer(char path[PATH_MAX + 1])
 {
-	if (errnumber == EACCES)
-		errstr = ft_find_name_pointer(errstr);
-	ft_dprintf(2, "ft_ls: %s: %s\n", errstr, strerror(errnumber));
+	char *name_pointer;
+
+	name_pointer = &(path[0]);
+	while (*name_pointer != '\0' && name_pointer != &(path[PATH_MAX]))
+		name_pointer++;
+	while (*name_pointer != '/' && name_pointer != &(path[0]))
+		name_pointer--;
+	return (name_pointer + (name_pointer[0] == '/'));
 }

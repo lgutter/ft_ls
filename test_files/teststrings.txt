@@ -18,3 +18,20 @@ ft_printff
 -a -- -l hello
 -- -l hello
 -a -l hello
+ft_ls
+link_ls
+end2endls.sh
+README.md
+source_files/main.c
+source_files/find_files/ft_find_options.c
+-a source_files
+source_files
+-a test_files/files_for_tests/aflie
+-a test_files/files_for_tests/linktoaflie
+-a test_files/files_for_tests/nothere
+ft_ls end2endls.h
+test_files/files_for_tests/nopermissions
+-a /Volumes/Storage/goinfre
+-a /Volumes/Storage/goinfre/filewithoutuser
+-a /Volumes/Storage/goinfre/filewithoutuserandgroup
+-a /Volumes/Storage/goinfre/filewithoutgroup

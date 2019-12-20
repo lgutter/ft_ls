@@ -1,2 +1,4 @@
 TESTSOURCES := ft_find_options_tests\
 ft_print_error_tests\
+ft_dir_to_list_tests\
+ft_stats_to_list_tests\

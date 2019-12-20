@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_print_error.c                                   :+:    :+:            */
+/*   ft_print_usage.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/13 10:43:57 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 21:56:36 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/20 21:29:23 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/20 21:30:20 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_print_error(int errnumber, char *errstr)
+void	ft_print_usage(void)
 {
-	if (errnumber == EACCES)
-		errstr = ft_find_name_pointer(errstr);
-	ft_dprintf(2, "ft_ls: %s: %s\n", errstr, strerror(errnumber));
+	char *usage;
+
+	usage = "usage: ft_ls [-Ralrt] [file ...]";
+	ft_dprintf(2, "%s\n", usage);
 }
