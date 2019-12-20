@@ -31,3 +31,4 @@ source_files
 -a test_files/files_for_tests/nothere
 ft_ls end2endls.h
 test_files/files_for_tests/nopermissions
+-a /Volumes/Storage/goinfre

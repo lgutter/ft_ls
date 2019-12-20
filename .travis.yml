@@ -11,6 +11,13 @@ branches:
 install:
     - brew install snaipe/soft/criterion
     - git clone --depth=1 https://github.com/thijsdejong/codam-norminette-plus ~/norminette+
+    - sudo mkdir /Volumes/Storage/goinfre
+    - sudo touch /Volumes/Storage/goinfre/filewithoutuser
+    - sudo touch /Volumes/Storage/goinfre/filewithoutgroup
+    - sudo touch /Volumes/Storage/goinfre/filewithoutuserandgroup
+    - sudo chown 4242 /Volumes/Storage/goinfre/filewithoutuser
+    - sudo chown root:4242 /Volumes/Storage/goinfre/filewithoutgroup
+    - sudo chown 4242:4343 /Volumes/Storage/goinfre/filewithoutuserandgroup
 before_script:
     - make test COV=1
 script:
