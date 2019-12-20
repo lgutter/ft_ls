@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/20 18:50:01 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 21:38:40 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@
 # include <time.h>
 # include <limits.h>
 # include <errno.h>
+# include <string.h>
 
 # include "ft_printf.h"
-
-/*
-**	Custom errno defines
-*/
-# define EUSAGE 4242
-# define EILLOPT 242
 
 /*
 **	enumerations for the options
@@ -74,6 +69,7 @@ typedef struct			s_file_info
 /*
 **	Core functions
 */
+
 int						main(int argc, char **argv);
 int						ft_ls(int filecount,\
 								char **filenames, t_options options);
@@ -81,12 +77,14 @@ int						ft_ls(int filecount,\
 /*
 ** Find functions
 */
+
 int						ft_find_options(int argc,\
 										char **argv, t_options *options);
 
 /*
 ** List functions
 */
+
 t_file_info				*ft_stats_to_list(char *filename,\
 										t_file_info **list_start);
 int						ft_dir_to_list(char *dirname, t_options options);
@@ -94,8 +92,11 @@ int						ft_dir_to_list(char *dirname, t_options options);
 /*
 **	Utility functions
 */
+
 char					*ft_find_name_pointer(char path[PATH_MAX + 1]);
 void					ft_print_error(int errnumber, char *errstr);
+void					ft_print_opt_error(char option);
+void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
 
 #endif

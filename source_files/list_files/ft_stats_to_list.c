@@ -6,29 +6,28 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/17 11:31:46 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 19:41:37 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 21:59:20 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_file_info	*init_list_item(t_file_info **list_start)
+static void			add_list_item(t_file_info **list_start, t_file_info *new)
 {
-	t_file_info *new;
+	t_file_info *temp;
 
 	if (*list_start == NULL)
 	{
-		new = (t_file_info *)ft_memalloc(sizeof(t_file_info));
 		*list_start = new;
-		return (new);
+		new->next = NULL;
 	}
 	else
 	{
-		new = *list_start;
-		while (new->next != NULL)
-			new = new->next;
-		new->next = (t_file_info *)ft_memalloc(sizeof(t_file_info));
-		return (new->next);
+		temp = *list_start;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+		new->next = NULL;
 	}
 }
 
@@ -78,7 +77,7 @@ t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start)
 	t_file_info	*new;
 	t_file_info	**new_pointer;
 
-	new = init_list_item(list_start);
+	new = (t_file_info *)ft_memalloc(sizeof(t_file_info));
 	new_pointer = &new;
 	if (new != NULL)
 	{
@@ -93,7 +92,9 @@ t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start)
 		else if (fetch_names(new) != 0)
 			return ((t_file_info *)ft_error_free((void **)new_pointer));
 		if (S_ISLNK(new->lstats.st_mode))
-			return (check_link(new_pointer));
+			new = check_link(new_pointer);
+		if (new != NULL)
+			add_list_item(list_start, new);
 	}
 	return (new);
 }

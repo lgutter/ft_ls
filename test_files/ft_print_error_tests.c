@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/13 12:24:00 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 13:18:00 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 21:41:34 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void redirect_std_err(void)
 
 Test(ft_print_error_tests, print_usage, .init = redirect_std_err)
 {
-	ft_print_error(EUSAGE, NULL);
+	ft_print_usage();
 	fflush(stderr);
 
 	cr_assert_stderr_eq_str("usage: ft_ls [-Ralrt] [file ...]\n");
@@ -49,5 +49,5 @@ Test(ft_print_error_tests, print_unkown, .init = redirect_std_err)
 	ft_print_error(424242, "iets");
 	fflush(stderr);
 
-	cr_assert_stderr_eq_str("ft_ls: 424242: Unknown errno\n");
+	cr_assert_stderr_eq_str("ft_ls: iets: Unknown error: 424242\n");
 }

@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 18:04:22 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 11:49:42 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 21:38:17 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_check_options(int i, char *str, t_options *options)
 			*options |= e_opt_t;
 		else
 		{
-			ft_print_error(EILLOPT, &(str[i]));
+			ft_print_opt_error(str[i]);
 			return (-1);
 		}
 		i++;
