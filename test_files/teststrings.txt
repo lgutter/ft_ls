@@ -32,3 +32,6 @@ source_files
 ft_ls end2endls.h
 test_files/files_for_tests/nopermissions
 -a /Volumes/Storage/goinfre
+-a /Volumes/Storage/goinfre/filewithoutuser
+-a /Volumes/Storage/goinfre/filewithoutuserandgroup
+-a /Volumes/Storage/goinfre/filewithoutgroup
