@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 12:26:08 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/18 18:02:04 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 12:08:12 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		ft_dir_to_list(char *dirname, t_options options)
 		}
 		return (0);
 	}
+	ft_print_error(errno, dirname);
 	return (-1);
 }

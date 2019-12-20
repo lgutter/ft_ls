@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 10:47:50 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/18 17:25:13 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 13:23:37 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include <criterion/redirect.h>
 #include "ft_ls.h"
 
+static void redirect_std_err(void)
+{
+    cr_redirect_stderr();
+}
 
 Test(ft_stats_to_list_tests, simple_existent_file_empty_list)
 {
@@ -28,6 +32,21 @@ Test(ft_stats_to_list_tests, simple_existent_file_empty_list)
 
 	cr_assert_neq(ret, NULL);
 	cr_assert_str_eq(ret->path, filenames[1]);
+}
+Test(ft_stats_to_list_tests, simple_nonexistent_file_empty_list, .init = redirect_std_err)
+{
+	int argc = 2;
+	t_file_info *ret;
+	t_file_info *list_start = NULL;
+	char **filenames = (char **)malloc(sizeof(char *) * argc);
+
+	filenames[0] = "test";
+	filenames[1] = "this/file/does/not/exist";
+	ret = ft_stats_to_list(filenames[1], &list_start);
+	fflush(stderr);
+
+	cr_assert_stderr_eq_str("ft_ls: this/file/does/not/exist: No such file or directory\n");
+	cr_assert_eq(ret, NULL);
 }
 
 Test(ft_stats_to_list_tests, simple_existent_files_empty_list)

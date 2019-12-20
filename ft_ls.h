@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/18 17:27:52 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/20 13:00:47 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,20 @@
 # include <grp.h>
 # include <time.h>
 # include <limits.h>
+# include <errno.h>
+
 # include "ft_printf.h"
+
+/*
+**	Custom errno defines
+*/
+
+# define EUSAGE 4242
+# define EILLOPT 242
+
+/*
+**	enumerations for the options
+*/
 
 enum					e_options
 {
@@ -32,7 +45,23 @@ enum					e_options
 	e_opt_t = 1 << 4,
 };
 
+/*
+**	typedef of an unsigned long for the options,
+**	this is where the above listen enums are stored.
+*/
+
 typedef unsigned long	t_options;
+
+/*
+** struct with info of a file:
+**	stats: struct as returned by the function lstat
+**	path: complete path of the file as given as argument
+**	name_pointer: a pointer to the position in path where the filename starts
+**	u_name: name of the user as given by getpwuid
+**	g_name: name of the group as given by getgrgid
+**	link_path: the path contained in the symlink as given by readlink
+**	next: a pointer to the next element in the list of info structs
+*/
 
 typedef struct			s_file_info
 {
@@ -72,7 +101,8 @@ int						ft_dir_to_list(char *dirname, t_options options);
 **	Utility functions
 */
 
-void					ft_print_error(char *errdex, char *errstr);
+char					*ft_find_name_pointer(char path[PATH_MAX + 1]);
+void					ft_print_error(int errnumber, char *errstr);
 void					*ft_error_free(void **memory);
 
 #endif

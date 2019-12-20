@@ -1,4 +1,5 @@
 LSSOURCES = utility_files/ft_print_error\
+utility_files/ft_find_name_pointer\
 utility_files/ft_error_free\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\

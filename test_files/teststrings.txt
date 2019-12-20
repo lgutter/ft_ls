@@ -30,3 +30,4 @@ source_files
 -a test_files/files_for_tests/linktoaflie
 -a test_files/files_for_tests/nothere
 ft_ls end2endls.h
+test_files/files_for_tests/nopermissions
