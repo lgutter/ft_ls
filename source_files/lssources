@@ -6,4 +6,9 @@ utility_files/ft_print_usage\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\
 list_files/ft_dir_to_list\
+list_files/ft_lex_sort\
+list_files/ft_lex_sort_r\
+list_files/ft_time_sort\
+list_files/ft_time_sort_r\
+list_files/ft_sort_list\
 ft_ls\

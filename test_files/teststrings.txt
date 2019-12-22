@@ -35,3 +35,8 @@ test_files/files_for_tests/nopermissions
 -a /Volumes/Storage/goinfre/filewithoutuser
 -a /Volumes/Storage/goinfre/filewithoutuserandgroup
 -a /Volumes/Storage/goinfre/filewithoutgroup
+-a ft_ls.h Makefile ft_printf/ft_printf.h checkNorm.sh .gitignore
+-r ft_ls.h ft_printf/ft_printf.h .gitignore Makefile checkNorm.sh
+-t .gitignore ft_ls.h ft_printf/ft_printf.h checkNorm.sh Makefile
+-tr checkNorm.sh .gitignore ft_ls.h Makefile ft_printf/ft_printf.h
+checkNorm.sh .gitignore ft_ls.h Makefile test_files/files_for_tests/nopermissions

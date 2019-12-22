@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/17 11:31:46 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 21:59:20 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/22 14:30:30 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ static t_file_info	*check_link(t_file_info **new_pointer)
 
 	new = *new_pointer;
 	if (readlink(new->path, new->link_path, PATH_MAX) < 0)
-		return ((t_file_info *)ft_error_free((void **)new_pointer));
-	if (stat(new->path, &(new->stats)) != 0)
 	{
 		ft_print_error(errno, new->path);
 		return ((t_file_info *)ft_error_free((void **)new_pointer));
