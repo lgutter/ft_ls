@@ -15,6 +15,10 @@ install:
     - sudo touch /Volumes/Storage/goinfre/filewithoutuser
     - sudo touch /Volumes/Storage/goinfre/filewithoutgroup
     - sudo touch /Volumes/Storage/goinfre/filewithoutuserandgroup
+    - sudo mkdir test_files/files_for_tests/nopermissions
+    - sudo ln -s test_files/files_for_tests/link1 test_files/files_for_tests/link2
+    - sudo ln -s test_files/files_for_tests/link2 test_files/files_for_tests/link1
+    - sudo chmod 000 test_files/files_for_tests/nopermissions
     - sudo chown 4242 /Volumes/Storage/goinfre/filewithoutuser
     - sudo chown root:4242 /Volumes/Storage/goinfre/filewithoutgroup
     - sudo chown 4242:4343 /Volumes/Storage/goinfre/filewithoutuserandgroup
