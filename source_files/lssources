@@ -3,8 +3,11 @@ utility_files/ft_find_name_pointer\
 utility_files/ft_error_free\
 utility_files/ft_print_opt_error\
 utility_files/ft_print_usage\
+utility_files/ft_print_file_info\
+utility_files/ft_str_longer\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\
+list_files/ft_conv_info_to_str\
 list_files/ft_dir_to_list\
 list_files/ft_lex_sort\
 list_files/ft_lex_sort_r\
