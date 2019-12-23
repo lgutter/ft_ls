@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/22 14:19:11 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/23 16:00:53 by ivan-tey      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,15 @@ int						ft_find_options(int argc,\
 
 t_file_info				*ft_stats_to_list(char *filename,\
 										t_file_info **list_start);
-int						ft_dir_to_list(char *dirname, t_options options);
 void					ft_sort_list(t_file_info **list_start,\
 										t_options options);
 void					ft_lex_sort(t_file_info **list_start);
 void					ft_lex_sort_r(t_file_info **list_start);
 void					ft_time_sort(t_file_info **list_start);
 void					ft_time_sort_r(t_file_info **list_start);
+void					ft_rec_dir(char *dirname, t_options options);
+
+
 
 /*
 **	Utility functions

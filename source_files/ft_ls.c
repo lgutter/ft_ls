@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 11:53:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/22 15:51:25 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/23 15:42:16 by ivan-tey      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_ls(int filecount, char **filenames, t_options options)
 		{
 			if (filecount > 1)
 				ft_printf("\n%s:\n", current->path);
-			ft_dir_to_list(current->path, options);
+			ft_rec_dir(current->path, options);
 		}
 		else
 			ft_printf("%s\n", current->path);
