@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:48:36 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/20 12:45:24 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/23 11:46:16 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int			main(int argc, char **argv)
 {
-	int			i;
-	t_options	options;
-	int			ret;
+	int					i;
+	t_options			options;
+	int					ret;
+	static char			*noarg = ".";
 
 	options = 0;
 	i = 1;
@@ -25,6 +26,9 @@ int			main(int argc, char **argv)
 		return (-1);
 	else
 		i = ret;
-	ret = ft_ls(argc - i, &(argv[i]), options);
+	if ((argc - i) == 0)
+		ret = ft_ls(1, &noarg, options);
+	else
+		ret = ft_ls(argc - i, &(argv[i]), options);
 	return (ret);
 }
