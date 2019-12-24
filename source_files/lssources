@@ -4,7 +4,7 @@ utility_files/ft_error_free\
 utility_files/ft_print_opt_error\
 utility_files/ft_print_usage\
 utility_files/ft_print_file_info\
-utility_files/ft_str_longer\
+utility_files/ft_strlonger\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\
 list_files/ft_conv_info_to_str\

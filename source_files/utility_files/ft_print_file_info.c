@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:18:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/23 17:16:59 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/24 13:57:19 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_width	*ft_init_width(t_file_info *list_start)
 	width = (t_width *)ft_memalloc(sizeof(t_width));
 	if (width == NULL)
 		return (NULL);
+	width->blocks = 0;
 	while (l_item != NULL)
 	{
 		ft_conv_info_to_str(list_start);
@@ -29,7 +30,10 @@ static t_width	*ft_init_width(t_file_info *list_start)
 		width->group = ft_strlonger(width->group, l_item->g_name);
 		width->size = ft_strlonger(width->size, l_item->size);
 		width->date = ft_strlonger(width->date, l_item->date);
+		width->blocks += l_item->lstats.st_blocks;
+		l_item = l_item->next;
 	}
+	return (width);
 }
 
 static void		ft_print_info(t_file_info *item, t_width *width)
@@ -41,8 +45,8 @@ static void		ft_print_info(t_file_info *item, t_width *width)
 	ft_printf("%*s ", width->size, item->size);
 	ft_printf("%3s ", item->month);
 	ft_printf("%*s ", width->date, item->date);
-	ft_printf("%*s ", width->tiye, item->tiye);
-	ft_printf("%*s ", item->name_pointer);
+	ft_printf("%5s ", item->tiye);
+	ft_printf("%s\n", item->name_pointer);
 }
 
 void			ft_print_files_info(t_file_info *list_start, t_options options)
@@ -52,7 +56,10 @@ void			ft_print_files_info(t_file_info *list_start, t_options options)
 
 	current = list_start;
 	if ((options & e_opt_l) != 0)
+	{
 		width = ft_init_width(list_start);
+		ft_printf("total %lu\n", width->blocks);
+	}
 	while (current != NULL)
 	{
 		if ((options & e_opt_a) != 0 || current->name_pointer[0] != '.')

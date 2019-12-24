@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/23 17:06:12 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/24 13:53:30 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct			s_file_info
 	struct stat			lstats;
 	char				path[PATH_MAX + 1];
 	char				*name_pointer;
-	char				mode[16 + 1];
+	char				mode[10 + 1];
 	char				links[8 + 1];
 	char				size[32 + 1];
 	char				month[3 + 1];
@@ -97,7 +97,7 @@ typedef struct			s_field_width
 	size_t				group;
 	size_t				size;
 	size_t				date;
-	size_t				tiye;
+	size_t				blocks;
 }						t_width;
 
 /*
@@ -141,6 +141,6 @@ void					ft_print_error(int errnumber, char *errstr);
 void					ft_print_opt_error(char option);
 void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
-size_t					ft_strlonger(char *str, size_t other_len);
+size_t					ft_strlonger(size_t other_len, char *str);
 
 #endif
