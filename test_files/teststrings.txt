@@ -40,3 +40,8 @@ test_files/files_for_tests/nopermissions
 -t .gitignore ft_ls.h ft_printf/ft_printf.h checkNorm.sh Makefile
 -tr checkNorm.sh .gitignore ft_ls.h Makefile ft_printf/ft_printf.h
 checkNorm.sh .gitignore ft_ls.h Makefile test_files/files_for_tests/nopermissions
+-laR .git
+-laR source_files
+-lat .git
+-latR source_files
+

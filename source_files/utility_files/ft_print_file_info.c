@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:18:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/24 13:57:19 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/28 17:40:08 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,21 @@ static t_width	*ft_init_width(t_file_info *list_start)
 	return (width);
 }
 
-static void		ft_print_info(t_file_info *item, t_width *width)
+static void		ft_print_info(t_file_info *item, t_width *width,\
+								t_options options)
 {
 	ft_printf("%-11s ", item->mode);
 	ft_printf("%*s ", width->links, item->links);
-	ft_printf("%*s ", width->user, item->u_name);
-	ft_printf("%*s ", width->group, item->g_name);
+	ft_printf("%*s  ", width->user, item->u_name);
+	ft_printf("%*s  ", width->group, item->g_name);
 	ft_printf("%*s ", width->size, item->size);
 	ft_printf("%3s ", item->month);
 	ft_printf("%*s ", width->date, item->date);
 	ft_printf("%5s ", item->tiye);
-	ft_printf("%s\n", item->name_pointer);
+	if ((options & e_args) == 0)
+		ft_printf("%s\n", item->path);
+	else
+		ft_printf("%s\n", item->name_pointer);
 }
 
 void			ft_print_files_info(t_file_info *list_start, t_options options)
@@ -55,17 +59,19 @@ void			ft_print_files_info(t_file_info *list_start, t_options options)
 	t_file_info	*current;
 
 	current = list_start;
-	if ((options & e_opt_l) != 0)
-	{
-		width = ft_init_width(list_start);
+	width = ft_init_width(list_start);
+	if ((options & e_opt_l) != 0 && (options & e_args) != 0)
 		ft_printf("total %lu\n", width->blocks);
-	}
 	while (current != NULL)
 	{
-		if ((options & e_opt_a) != 0 || current->name_pointer[0] != '.')
+		if (((options & e_args) == 0 && !S_ISDIR(current->lstats.st_mode))\
+			|| ((options & e_args) != 0 && (options & e_opt_a) != 0) ||\
+			((options & e_args) != 0 && current->name_pointer[0] != '.'))
 		{
 			if ((options & e_opt_l) != 0)
-				ft_print_info(current, width);
+				ft_print_info(current, width, options);
+			else if ((options & e_args) == 0)
+				ft_printf("%s\n", current->path);
 			else
 				ft_printf("%s\n", current->name_pointer);
 		}

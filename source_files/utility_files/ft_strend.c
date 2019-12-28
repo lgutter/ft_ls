@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_print_error.c                                   :+:    :+:            */
+/*   ft_strend.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/13 10:43:57 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/28 15:42:29 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/28 16:33:46 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/28 17:23:06 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	ft_print_error(int errnumber, char *errstr)
+int		ft_strend(const char *source, const char *end)
 {
-	if (errnumber == EACCES)
-		errstr = ft_find_name_pointer(errstr);
-	ft_dprintf(2, "ft_ls: %s: %s\n", errstr, strerror(errnumber));
-	return (-1);
+	size_t index;
+	size_t judex;
+
+	index = ft_strlen(source);
+	judex = ft_strlen(end);
+	while (source[index] == end[judex])
+	{
+		if (judex == 0)
+		{
+			return (1);
+		}
+		index--;
+		judex--;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/28 10:27:54 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/28 17:21:23 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ enum					e_options
 	e_opt_a = 1 << 2,
 	e_opt_r = 1 << 3,
 	e_opt_t = 1 << 4,
+	e_args = 1 << 5,
 };
 
 /*
@@ -127,7 +128,8 @@ void					ft_lex_sort(t_file_info **list_start);
 void					ft_lex_sort_r(t_file_info **list_start);
 void					ft_time_sort(t_file_info **list_start);
 void					ft_time_sort_r(t_file_info **list_start);
-void					ft_rec_dir(char *dirname, t_options options);
+void					ft_rec_dir(char dirname[PATH_MAX + 1],\
+									t_options options);
 void					ft_conv_info_to_str(t_file_info *l_item);
 
 /*
@@ -137,10 +139,15 @@ void					ft_conv_info_to_str(t_file_info *l_item);
 char					*ft_find_name_pointer(char path[PATH_MAX + 1]);
 void					ft_print_files_info(t_file_info *list_start,\
 											t_options options);
-void					ft_print_error(int errnumber, char *errstr);
+int						ft_print_error(int errnumber, char *errstr);
 void					ft_print_opt_error(char option);
 void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
 size_t					ft_strlonger(size_t other_len, char *str);
+int						ft_strend(const char *source, const char *end);
+
+int						ft_path_expand(char dest[PATH_MAX + 1],\
+						char path[PATH_MAX + 1], char *addition,\
+										t_options options);
 
 #endif
