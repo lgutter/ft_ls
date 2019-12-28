@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/23 16:00:53 by ivan-tey      ########   odam.nl         */
+/*   Updated: 2019/12/28 10:27:54 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,16 @@ enum					e_options
 typedef unsigned long	t_options;
 
 /*
-**	struct with info of a file:
+**	struct with info of the file:
 **		stats: struct as returned by the function lstat
 **		path: complete path of the file as given as argument
 **		name_pointer: pointer to the position in path where the filename starts
+**		mode: st_mode converted to string
+**		links: st_nlink converted to string
+**		size: st_size converted to string
+**		month: the month extracted from st_mtimespec converted to string
+**		date: the date(day) extracted from st_mtimespec converted to string
+**		tiye: the time/year extracted from st_mtimespec converted to string
 **		u_name: name of the user as given by getpwuid
 **		g_name: name of the group as given by getgrgid
 **		link_path: the path contained in the symlink as given by readlink
@@ -60,11 +66,39 @@ typedef struct			s_file_info
 	struct stat			lstats;
 	char				path[PATH_MAX + 1];
 	char				*name_pointer;
+	char				mode[10 + 1];
+	char				links[8 + 1];
+	char				size[32 + 1];
+	char				month[3 + 1];
+	char				date[2 + 1];
+	char				tiye[5 + 1];
 	char				u_name[NAME_MAX + 1];
 	char				g_name[NAME_MAX + 1];
 	char				link_path[PATH_MAX + 1];
 	struct s_file_info	*next;
 }						t_file_info;
+
+/*
+**	Struct that holds the minimum field width of every field in the long output.
+**	To clarify, a list of every field:
+**		mode: the permissions of the file
+**		links: the amount of links to the file
+**		user: the owner of the file
+**		group: the group of the file
+**		size: the size of the file in bytes
+**		month: the month in which the file was last modified
+**		date: the date on which the file was last modified
+**		tiye: the time or year when the file was last modified
+*/
+typedef struct			s_field_width
+{
+	size_t				links;
+	size_t				user;
+	size_t				group;
+	size_t				size;
+	size_t				date;
+	size_t				blocks;
+}						t_width;
 
 /*
 **	Core functions
@@ -94,17 +128,19 @@ void					ft_lex_sort_r(t_file_info **list_start);
 void					ft_time_sort(t_file_info **list_start);
 void					ft_time_sort_r(t_file_info **list_start);
 void					ft_rec_dir(char *dirname, t_options options);
-
-
+void					ft_conv_info_to_str(t_file_info *l_item);
 
 /*
 **	Utility functions
 */
 
 char					*ft_find_name_pointer(char path[PATH_MAX + 1]);
+void					ft_print_files_info(t_file_info *list_start,\
+											t_options options);
 void					ft_print_error(int errnumber, char *errstr);
 void					ft_print_opt_error(char option);
 void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
+size_t					ft_strlonger(size_t other_len, char *str);
 
 #endif
