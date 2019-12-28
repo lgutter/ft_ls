@@ -44,4 +44,7 @@ checkNorm.sh .gitignore ft_ls.h Makefile test_files/files_for_tests/nopermission
 -laR source_files
 -lat .git
 -latR source_files
-
+-lraRt .git
+-Rar
+ft_ls.h source_files Makefile
+-R ft_ls.h source_files Makefile
