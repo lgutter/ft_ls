@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 10:46:43 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/28 17:17:24 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 18:24:03 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			ft_path_expand(char dest[PATH_MAX + 1], char path[PATH_MAX + 1],\
 		dest[i] = '/';
 		i++;
 	}
-	if ((options & e_args) == 0 && strcmp(path, ".") == 0)
+	if ((options & e_args) == 0 && ft_strcmp(path, ".") == 0)
 		return (ft_reverse(dest, addition));
 	while (i < PATH_MAX && addition[j] != '\0')
 	{

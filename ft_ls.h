@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/29 14:11:52 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 17:50:37 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef unsigned long	t_options;
 */
 typedef struct			s_file_info
 {
-	struct stat			stats;
 	struct stat			lstats;
 	char				path[PATH_MAX + 1];
 	char				*name_pointer;
@@ -121,7 +120,7 @@ int						ft_find_options(int argc,\
 */
 
 t_file_info				*ft_stats_to_list(char *filename,\
-											t_file_info **list_start);
+								t_file_info **list_start, t_options options);
 void					ft_sort_list(t_file_info **list_start,\
 										t_options options);
 void					ft_lex_sort(t_file_info **list_start);
@@ -131,6 +130,7 @@ void					ft_time_sort_r(t_file_info **list_start);
 int						ft_rec_dir(char dirname[PATH_MAX + 1],\
 									t_options options);
 void					ft_conv_info_to_str(t_file_info *l_item);
+void					ft_free_list(t_file_info **list_start);
 
 /*
 **	Utility functions
@@ -144,7 +144,7 @@ void					ft_print_opt_error(char option);
 void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
 size_t					ft_strlonger(size_t other_len, char *str);
-
+int						ft_is_dir(char *filename);
 int						ft_path_expand(char dest[PATH_MAX + 1],\
 						char path[PATH_MAX + 1], char *addition,\
 										t_options options);

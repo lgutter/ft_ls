@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:18:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/29 11:26:20 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 18:31:57 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ void			ft_print_files_info(t_file_info *list_start, t_options options)
 	t_file_info	*current;
 
 	current = list_start;
-	width = ft_init_width(list_start);
+	width = NULL;
+	if ((options & e_opt_l) != 0)
+		width = ft_init_width(list_start);
 	if ((options & e_opt_l) != 0 && (options & e_args) != 0)
 		ft_printf("total %lu\n", width->blocks);
 	while (current != NULL)
 	{
-		if (((options & e_args) == 0 && !S_ISDIR(current->lstats.st_mode))\
+		if (((options & e_args) == 0 && ft_is_dir(current->path) == 0)\
 			|| ((options & e_args) != 0 && (options & e_opt_a) != 0) ||\
 			((options & e_args) != 0 && current->name_pointer[0] != '.'))
 		{
@@ -88,4 +90,6 @@ void			ft_print_files_info(t_file_info *list_start, t_options options)
 		}
 		current = current->next;
 	}
+	if (width != NULL)
+		free(width);
 }

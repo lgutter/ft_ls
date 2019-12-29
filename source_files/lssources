@@ -5,6 +5,7 @@ utility_files/ft_print_opt_error\
 utility_files/ft_print_usage\
 utility_files/ft_print_file_info\
 utility_files/ft_strlonger\
+utility_files/ft_is_dir\
 utility_files/ft_path_expand\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\
@@ -14,5 +15,6 @@ list_files/ft_lex_sort_r\
 list_files/ft_time_sort\
 list_files/ft_time_sort_r\
 list_files/ft_sort_list\
-ft_ls\
 list_files/ft_rec_dir\
+list_files/ft_free_list\
+ft_ls\

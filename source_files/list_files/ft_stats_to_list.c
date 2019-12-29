@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/17 11:31:46 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/29 10:58:37 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 18:17:38 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int			fetch_names(t_file_info *new)
 	return (0);
 }
 
-t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start)
+t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start,\
+										t_options options)
 {
 	t_file_info	*new;
 	t_file_info	**new_pointer;
@@ -69,13 +70,17 @@ t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start)
 		if (ft_strncpy(&(new->path[0]), filename, PATH_MAX) == NULL)
 			return ((t_file_info *)ft_error_free((void **)new_pointer));
 		new->name_pointer = ft_find_name_pointer(new->path);
-		if (lstat(filename, &(new->lstats)) != 0)
+		if ((options & e_opt_l) != 0 &&\
+			((options & e_opt_a) != 0 || new->name_pointer[0] != '.'))
 		{
-			ft_print_error(errno, filename);
-			return ((t_file_info *)ft_error_free((void **)new_pointer));
+			if (lstat(filename, &(new->lstats)) != 0)
+			{
+				ft_print_error(errno, filename);
+				return ((t_file_info *)ft_error_free((void **)new_pointer));
+			}
+			else if (fetch_names(new) != 0)
+				return ((t_file_info *)ft_error_free((void **)new_pointer));
 		}
-		else if (fetch_names(new) != 0)
-			return ((t_file_info *)ft_error_free((void **)new_pointer));
 		if (new != NULL)
 			add_list_item(list_start, new);
 	}
