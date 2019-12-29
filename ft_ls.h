@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/28 17:21:23 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 11:06:52 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,14 @@ int						ft_find_options(int argc,\
 */
 
 t_file_info				*ft_stats_to_list(char *filename,\
-										t_file_info **list_start);
+											t_file_info **list_start);
 void					ft_sort_list(t_file_info **list_start,\
 										t_options options);
 void					ft_lex_sort(t_file_info **list_start);
 void					ft_lex_sort_r(t_file_info **list_start);
 void					ft_time_sort(t_file_info **list_start);
 void					ft_time_sort_r(t_file_info **list_start);
-void					ft_rec_dir(char dirname[PATH_MAX + 1],\
+int						ft_rec_dir(char dirname[PATH_MAX + 1],\
 									t_options options);
 void					ft_conv_info_to_str(t_file_info *l_item);
 
