@@ -12,6 +12,8 @@ ft_printff
 -jls ft_printf
 -Jal bla bla
 @
+-
+--
 -l -j
 -l lwrgjh
 -lraRt hello
@@ -48,3 +50,10 @@ checkNorm.sh .gitignore ft_ls.h Makefile test_files/files_for_tests/nopermission
 -Rar
 ft_ls.h source_files Makefile
 -R ft_ls.h source_files Makefile
+source_files Makefile ft_ls.h
+-R source_files Makefile ft_ls.h
+-Rartl /Users/lgutter/Library/Application\ Scripts
+-Ratl /Users/lgutter/Library/Application\ Scripts
+-Rarl /Users/lgutter/Library/Application\ Scripts
+-Ral /Users/lgutter/Library/Application\ Scripts
+-la link_to_git
