@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:35:11 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/29 11:07:03 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 14:45:06 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ int				ft_rec_dir(char dirname[PATH_MAX + 1], t_options options)
 		ft_print_cur_dir(dirname);
 	dirp = opendir(dirname);
 	if (dirp == NULL)
-	{
 		return (ft_print_error(errno, dirname));
-	}
 	if (ft_print_dir(dirname, &options, &dir_list) == -1)
 		return (-1);
 	while (dir_list != NULL)
