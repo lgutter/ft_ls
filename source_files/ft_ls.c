@@ -6,16 +6,32 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 11:53:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/29 13:14:16 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 14:35:29 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_ls(int filecount, char **filenames, t_options options)
+static void	ft_handle_list(t_file_info **list_start, t_options options, int fc)
+{
+	t_file_info *current;
+
+	current = *list_start;
+	while (current != NULL)
+	{
+		if ((options & e_args) != 0)
+			options -= e_args;
+		if (fc > 1)
+			options |= e_args;
+		if (S_ISDIR(current->lstats.st_mode))
+			ft_rec_dir(current->path, options);
+		current = current->next;
+	}
+}
+
+int			ft_ls(int filecount, char **filenames, t_options options)
 {
 	t_file_info		*current;
-	t_file_info		*list_start;
 	int				i;
 
 	i = 0;
@@ -25,18 +41,9 @@ int		ft_ls(int filecount, char **filenames, t_options options)
 		ft_stats_to_list(filenames[i], &current);
 		i++;
 	}
-	ft_sort_list(&current, options);
+	if (current != NULL)
+		ft_sort_list(&current, options);
 	ft_print_files_info(current, options);
-	list_start = current;
-	while (current != NULL)
-	{
-		if ((options & e_args) != 0)
-			options -= e_args;
-		if (filecount > 1)
-			options |= e_args;
-		if (S_ISDIR(current->lstats.st_mode))
-			ft_rec_dir(current->path, options);
-		current = current->next;
-	}
+	ft_handle_list(&current, options, filecount);
 	return (0);
 }
