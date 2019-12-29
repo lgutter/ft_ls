@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/29 11:06:52 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 14:11:52 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void					ft_print_opt_error(char option);
 void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
 size_t					ft_strlonger(size_t other_len, char *str);
-int						ft_strend(const char *source, const char *end);
 
 int						ft_path_expand(char dest[PATH_MAX + 1],\
 						char path[PATH_MAX + 1], char *addition,\
