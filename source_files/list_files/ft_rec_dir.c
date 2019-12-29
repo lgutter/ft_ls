@@ -6,21 +6,21 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:35:11 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/28 19:07:08 by ivan-tey      ########   odam.nl         */
+/*   Updated: 2019/12/29 11:07:03 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_print_cur_dir(t_file_info *item)
+static void		ft_print_cur_dir(char dirname[PATH_MAX + 1])
 {
 	int		i;
-	char	directory[PATH_MAX + 1];
 
-	i = ((int)item->name_pointer - (int)item->path - 1);
-	ft_strcpy(directory, item->path);
-	directory[i] = '\0';
-	ft_printf("\n%s:\n", directory);
+	i = ft_strlen(dirname);
+	i--;
+	if (dirname[i] == '/')
+		dirname[i] = '\0';
+	ft_printf("\n%s:\n", dirname);
 }
 
 static int		ft_check_rec(t_file_info *current, t_options options)
@@ -71,37 +71,37 @@ static int		ft_print_dir(char dirname[PATH_MAX + 1], t_options *options,\
 	}
 	closedir(dir);
 	ft_sort_list(list_start, *options);
-	if ((*options & e_args) != 0)
-		ft_print_cur_dir(*list_start);
 	*options |= e_args;
 	ft_print_files_info(*list_start, *options);
 	return (0);
 }
 
-void			ft_rec_dir(char dirname[PATH_MAX + 1], t_options options)
+int				ft_rec_dir(char dirname[PATH_MAX + 1], t_options options)
 {
 	DIR				*dirp;
 	t_file_info		*dir_list;
 	char			next_dir[PATH_MAX + 1];
 
 	dir_list = NULL;
+	if ((options & e_args) != 0)
+		ft_print_cur_dir(dirname);
 	dirp = opendir(dirname);
 	if (dirp == NULL)
 	{
-		ft_print_error(errno, dirname);
-		return ;
+		return (ft_print_error(errno, dirname));
 	}
 	if (ft_print_dir(dirname, &options, &dir_list) == -1)
-		return ;
+		return (-1);
 	while (dir_list != NULL)
 	{
 		if (ft_check_rec(dir_list, options) == 1)
 		{
 			if (ft_path_expand(next_dir, dirname, dir_list->name_pointer,\
 								options) == -1)
-				return ;
+				return (-1);
 			ft_rec_dir(next_dir, options);
 		}
 		dir_list = dir_list->next;
 	}
+	return (0);
 }

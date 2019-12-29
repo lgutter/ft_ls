@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/17 11:31:46 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/22 14:30:30 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 10:58:37 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,6 @@ static int			fetch_names(t_file_info *new)
 	return (0);
 }
 
-static t_file_info	*check_link(t_file_info **new_pointer)
-{
-	t_file_info *new;
-
-	new = *new_pointer;
-	if (readlink(new->path, new->link_path, PATH_MAX) < 0)
-	{
-		ft_print_error(errno, new->path);
-		return ((t_file_info *)ft_error_free((void **)new_pointer));
-	}
-	return (new);
-}
-
 t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start)
 {
 	t_file_info	*new;
@@ -89,8 +76,6 @@ t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start)
 		}
 		else if (fetch_names(new) != 0)
 			return ((t_file_info *)ft_error_free((void **)new_pointer));
-		if (S_ISLNK(new->lstats.st_mode))
-			new = check_link(new_pointer);
 		if (new != NULL)
 			add_list_item(list_start, new);
 	}
