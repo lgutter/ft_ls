@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 18:04:22 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 21:38:17 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 14:23:39 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	ft_check_options(int i, char *str, t_options *options)
 {
+	if (str[i] == '\0')
+		return (3);
 	if (str[i] == '-' && str[i + 1] == '\0')
 		return (2);
 	while (str[i] != '\0')
@@ -53,6 +55,8 @@ int			ft_find_options(int argc, char **argv, t_options *options)
 		{
 			return (i + 1);
 		}
+		else if (ret == 3)
+			return (i);
 		i++;
 	}
 	return (i);
