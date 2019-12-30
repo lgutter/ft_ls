@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/30 10:17:05 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/30 18:32:06 by ivan-tey      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ $(LIBFT): FORCE
 $(TEST): $(OBJECTS) $(NAME) $(TESTOBJECTS)
 	@$(MAKE) norm
 	@$(MAKE) clean
-	@$(CC) $(OBJECTS) $(TESTOBJECTS) $(CFLAGS) $(LIBRARY) -lcriterion -o $@
+	@$(CC) $(OBJECTS) $(TESTOBJECTS) $(CFLAGS) $(LIBPATH) $(LIBRARY) \
+	-lcriterion -o $@
 	@echo "$(C_TEST)Test program has been compiled$(C_RESET)"
 
 norm:
