@@ -7,6 +7,7 @@ utility_files/ft_print_file_info\
 utility_files/ft_strlonger\
 utility_files/ft_is_dir\
 utility_files/ft_path_expand\
+utility_files/ft_check_need_stats\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\
 list_files/ft_conv_info_to_str\

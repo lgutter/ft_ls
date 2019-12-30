@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/29 17:50:37 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 12:24:33 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,7 @@ int						ft_is_dir(char *filename);
 int						ft_path_expand(char dest[PATH_MAX + 1],\
 						char path[PATH_MAX + 1], char *addition,\
 										t_options options);
+int						ft_check_need_stats(t_options options, char firstchar,\
+											char type);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/17 11:31:46 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/29 18:17:38 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 12:23:45 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ t_file_info			*ft_stats_to_list(char *filename, t_file_info **list_start,\
 		if (ft_strncpy(&(new->path[0]), filename, PATH_MAX) == NULL)
 			return ((t_file_info *)ft_error_free((void **)new_pointer));
 		new->name_pointer = ft_find_name_pointer(new->path);
-		if ((options & e_opt_l) != 0 &&\
-			((options & e_opt_a) != 0 || new->name_pointer[0] != '.'))
+		if (ft_check_need_stats(options, new->name_pointer[0], 'b'))
 		{
 			if (lstat(filename, &(new->lstats)) != 0)
 			{

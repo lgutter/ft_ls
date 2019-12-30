@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:35:11 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/29 17:54:47 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 12:25:16 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,19 @@ static int		ft_print_dir(char dirname[PATH_MAX + 1], t_options *options,\
 	if (dir == NULL && ft_print_error(errno, dirname))
 		return (-1);
 	direntry = readdir(dir);
+	*options |= e_args;
 	while (direntry != NULL)
 	{
 		if (ft_path_expand(file, dirname, direntry->d_name, *options) == -1)
 			return (-1);
-		ft_stats_to_list(file, list_start, *options);
+		if (ft_check_need_stats(*options, direntry->d_name[0], 'a'))
+			ft_stats_to_list(file, list_start, *options);
 		direntry = readdir(dir);
 	}
 	closedir(dir);
 	if (*list_start != NULL)
 	{
 		ft_sort_list(list_start, *options);
-		*options |= e_args;
 		ft_print_files_info(*list_start, *options);
 	}
 	return (0);
