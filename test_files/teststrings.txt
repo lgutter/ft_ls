@@ -57,3 +57,4 @@ source_files Makefile ft_ls.h
 -Rarl /Users/lgutter/Library/Application\ Scripts
 -Ral /Users/lgutter/Library/Application\ Scripts
 -la link_to_git
+-l ft_printf
