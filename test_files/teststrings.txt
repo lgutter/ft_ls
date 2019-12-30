@@ -61,3 +61,4 @@ source_files Makefile ft_ls.h
 -la /sgoinfre/lgutter
 -laR /etc
 -laR /usr
+-laR /Applications
