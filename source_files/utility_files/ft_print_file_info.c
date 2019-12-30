@@ -6,13 +6,13 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:18:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/29 18:31:57 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 11:05:45 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_width	*ft_init_width(t_file_info *list_start)
+static t_width	*ft_init_width(t_file_info *list_start, t_options options)
 {
 	t_width		*width;
 	t_file_info	*l_item;
@@ -30,7 +30,9 @@ static t_width	*ft_init_width(t_file_info *list_start)
 		width->group = ft_strlonger(width->group, l_item->g_name);
 		width->size = ft_strlonger(width->size, l_item->size);
 		width->date = ft_strlonger(width->date, l_item->date);
-		width->blocks += l_item->lstats.st_blocks;
+		if ((options & e_args) == 0 || (options & e_opt_a) != 0 ||\
+			l_item->name_pointer[0] != '.')
+			width->blocks += l_item->lstats.st_blocks;
 		l_item = l_item->next;
 	}
 	return (width);
@@ -64,6 +66,22 @@ static void		ft_print_info(t_file_info *item, t_width *width,\
 	ft_printf("\n");
 }
 
+static int		ft_check_print(t_file_info *l_item, t_options options)
+{
+	if ((options & e_args) == 0 && ft_is_dir(l_item->path) == 0)
+	{
+		return (1);
+	}
+	else if ((options & e_args) != 0)
+	{
+		if ((options & e_opt_a) != 0 || l_item->name_pointer[0] != '.')
+		{
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void			ft_print_files_info(t_file_info *list_start, t_options options)
 {
 	t_width		*width;
@@ -72,14 +90,12 @@ void			ft_print_files_info(t_file_info *list_start, t_options options)
 	current = list_start;
 	width = NULL;
 	if ((options & e_opt_l) != 0)
-		width = ft_init_width(list_start);
+		width = ft_init_width(list_start, options);
 	if ((options & e_opt_l) != 0 && (options & e_args) != 0)
 		ft_printf("total %lu\n", width->blocks);
 	while (current != NULL)
 	{
-		if (((options & e_args) == 0 && ft_is_dir(current->path) == 0)\
-			|| ((options & e_args) != 0 && (options & e_opt_a) != 0) ||\
-			((options & e_args) != 0 && current->name_pointer[0] != '.'))
+		if (ft_check_print(current, options) == 1)
 		{
 			if ((options & e_opt_l) != 0)
 				ft_print_info(current, width, options);
