@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 13:25:14 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/22 14:13:08 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 18:23:45 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_file_info	*ft_swap_start_list(t_file_info **list_start)
 	t_file_info	*current;
 
 	current = (*list_start)->next;
-	if (strcmp((*list_start)->path, current->path) < 0)
+	if (ft_strcmp((*list_start)->path, current->path) < 0)
 	{
 		(*list_start)->next = current->next;
 		current->next = *list_start;
@@ -41,7 +41,7 @@ void				ft_lex_sort_r(t_file_info **list_start)
 	future = current->next;
 	while (current->next != NULL)
 	{
-		if (strcmp(current->path, future->path) < 0)
+		if (ft_strcmp(current->path, future->path) < 0)
 		{
 			previous->next = future;
 			current->next = future->next;

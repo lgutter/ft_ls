@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 13:25:14 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/22 14:07:14 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 12:43:37 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@ static t_file_info	*ft_swap_start_list(t_file_info **list_start)
 	return (*list_start);
 }
 
+static int			ft_checktime(t_file_info *one, t_file_info *two)
+{
+	if (one->lstats.st_mtimespec.tv_sec >\
+			two->lstats.st_mtimespec.tv_sec)
+	{
+		return (1);
+	}
+	else if (one->lstats.st_mtimespec.tv_sec ==\
+			two->lstats.st_mtimespec.tv_sec)
+	{
+		if (one->lstats.st_mtimespec.tv_nsec >\
+			two->lstats.st_mtimespec.tv_nsec)
+		{
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void				ft_time_sort(t_file_info **list_start)
 {
 	t_file_info	*current;
@@ -38,8 +57,7 @@ void				ft_time_sort(t_file_info **list_start)
 	future = current->next;
 	while (current->next != NULL)
 	{
-		if (future->lstats.st_mtimespec.tv_sec >\
-			current->lstats.st_mtimespec.tv_sec)
+		if (ft_checktime(future, current))
 		{
 			previous->next = future;
 			current->next = future->next;

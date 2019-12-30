@@ -28,6 +28,10 @@ for test in "${TESTS[@]}"; do
 	FAKEERROR=$(cat fakeerror)
 	FAKEERROR="${FAKEERROR//ft_ls/ls}"
 	echo "${FAKEERROR//Ralrt/ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1}" > fakeerror_temp
+	if grep -q -E "([r-][w-][xsS-]){2}[r-][w-][-xtT][@+]" <<< "$REAL"; then
+		printf "replacing @ and + ACL signs for test %i!\n" $i
+		REAL=$(sed -E "s/(([r-][w-][xsS-]){2}[r-][w-][-xtT])[@+]/\1 /g" <<< "$REAL")
+	fi
 	if [[ "$REAL" != "$FAKE" ]]; then
 		if [ -f testresults.txt ] && [[ "$failed" == "0" ]]; then
 			echo "" > testresults.txt

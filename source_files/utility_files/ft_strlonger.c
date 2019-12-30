@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_print_error.c                                   :+:    :+:            */
+/*   ft_strlonger.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/13 10:43:57 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/28 15:42:29 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/23 17:00:58 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/24 11:31:25 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	ft_print_error(int errnumber, char *errstr)
+size_t	ft_strlonger(size_t other_len, char *str)
 {
-	if (errnumber == EACCES)
-		errstr = ft_find_name_pointer(errstr);
-	ft_dprintf(2, "ft_ls: %s: %s\n", errstr, strerror(errnumber));
-	return (-1);
+	size_t len;
+
+	len = ft_strlen(str);
+	return (len > other_len ? len : other_len);
 }

@@ -1,21 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_print_error.c                                   :+:    :+:            */
+/*   ft_is_dir.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/13 10:43:57 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/28 15:42:29 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/29 17:46:36 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/30 09:55:59 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	ft_print_error(int errnumber, char *errstr)
+int		ft_is_dir(char *filename)
 {
-	if (errnumber == EACCES)
-		errstr = ft_find_name_pointer(errstr);
-	ft_dprintf(2, "ft_ls: %s: %s\n", errstr, strerror(errnumber));
-	return (-1);
+	DIR		*dirp;
+	char	buf[PATH_MAX];
+
+	if (readlink(filename, buf, PATH_MAX) > 0)
+		return (0);
+	else if (errno == EINVAL)
+	{
+		dirp = opendir(filename);
+		if (dirp != NULL)
+		{
+			closedir(dirp);
+			return (1);
+		}
+		else if (errno == EACCES)
+		{
+			return (1);
+		}
+		else if (errno == ENOTDIR)
+		{
+			return (0);
+		}
+	}
+	return (0);
 }

@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_print_error.c                                   :+:    :+:            */
+/*   ft_free_list.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/13 10:43:57 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/28 15:42:29 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/29 14:52:36 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/29 15:22:03 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	ft_print_error(int errnumber, char *errstr)
+void	ft_free_list(t_file_info **list_start)
 {
-	if (errnumber == EACCES)
-		errstr = ft_find_name_pointer(errstr);
-	ft_dprintf(2, "ft_ls: %s: %s\n", errstr, strerror(errnumber));
-	return (-1);
+	t_file_info *current;
+	t_file_info *temp;
+
+	current = *list_start;
+	*list_start = NULL;
+	while (current->next != NULL)
+	{
+		temp = current;
+		current = current->next;
+		free(temp);
+		temp = NULL;
+	}
+	free(current);
+	current = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:49:18 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/22 14:18:53 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/29 18:23:59 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_check_lex_sort(t_file_info *current, t_options options)
 	{
 		while (current->next != NULL)
 		{
-			if (strcmp(current->path, (current->next)->path) < 0)
+			if (ft_strcmp(current->path, (current->next)->path) < 0)
 				return (-1);
 			current = current->next;
 		}
@@ -27,7 +27,7 @@ static int	ft_check_lex_sort(t_file_info *current, t_options options)
 	{
 		while (current->next != NULL)
 		{
-			if (strcmp(current->path, (current->next)->path) > 0)
+			if (ft_strcmp(current->path, (current->next)->path) > 0)
 				return (-1);
 			current = current->next;
 		}

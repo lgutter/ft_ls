@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_dir_to_list.c                                   :+:    :+:            */
+/*   ft_check_need_stats.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/16 12:26:08 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/20 12:08:12 by lgutter       ########   odam.nl         */
+/*   Created: 2019/12/30 12:19:51 by lgutter        #+#    #+#                */
+/*   Updated: 2019/12/30 12:23:15 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_dir_to_list(char *dirname, t_options options)
+int			ft_check_need_stats(t_options options, char firstchar, char type)
 {
-	DIR				*dir;
-	struct dirent	*direntry;
-
-	dir = opendir(dirname);
-	if (dir != NULL)
+	if ((options & e_args) == 0)
 	{
-		direntry = readdir(dir);
-		while (direntry != NULL)
+		return (1);
+	}
+	if (((options & e_opt_l) != 0 || (options & e_opt_t) != 0 || type == 'a'))
+	{
+		if ((options & e_opt_a) != 0)
 		{
-			if (((options & e_opt_a) != 0) ||\
-				(strcmp(direntry->d_name, ".") != 0 &&\
-				strcmp(direntry->d_name, "..") != 0))
-				ft_printf("%s\n", direntry->d_name);
-			direntry = readdir(dir);
+			return (1);
 		}
+		else if (firstchar != '.')
+		{
+			return (1);
+		}
+		else
+		{
+			return (0);
+		}
+	}
+	else
+	{
 		return (0);
 	}
-	ft_print_error(errno, dirname);
-	return (-1);
 }
