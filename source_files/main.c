@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:48:36 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/23 11:46:16 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 10:49:03 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			main(int argc, char **argv)
 	i = 1;
 	ret = ft_find_options(argc, argv, &options);
 	if (ret == -1)
-		return (-1);
+		return (1);
 	else
 		i = ret;
 	if ((argc - i) == 0)
