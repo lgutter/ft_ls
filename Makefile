@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/18 15:23:49 by lgutter       ########   odam.nl          #
+#    Updated: 2019/12/30 10:17:05 by lgutter       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ TESTOBJECTS := $(TESTSOURCES:%= test_files/%.o)
 COVJUNK += $(TESTSOURCES:%= test_files/%.gcno)
 
 LIBRARY = -lftprintf
-export LIBRARY_PATH=$(HOME)/.brew/lib:$(PWD)/ft_printf
-export CPATH=$(HOME)/.brew/include:$(PWD):$(PWD)/ft_printf
+LIBPATH=-L ./ft_printf
+INCLPATH=-I . -I ./ft_printf
 HEADER := ft_ls.h
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -g
@@ -53,7 +53,7 @@ all: $(NAME)
 
 $(NAME): $(MAIN) $(OBJECTS) $(HEADER) $(LIBFT)
 	@#$(MAKE) norm
-	@$(CC) $(MAIN) $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $@
+	@$(CC) $(MAIN) $(OBJECTS) $(CFLAGS) $(LIBPATH) $(LIBRARY) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_LS)ft_ls has been compiled$(C_RESET)"
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
@@ -62,7 +62,7 @@ $(LIBFT): FORCE
 	@$(MAKE) -C ft_printf/
 
 %.o: %.c
-	@$(CC) -c $< $(CFLAGS) -o $@
+	@$(CC) -c $< $(CFLAGS) $(INCLPATH) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_OBJECTS)$@ compiled$(C_RESET)"
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
