@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 17:05:02 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/24 12:36:19 by lgutter       ########   odam.nl         */
+/*   Updated: 2019/12/30 14:57:16 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static void	ft_conv_time_str(t_file_info *l_item)
 	{
 		ft_strncpy(l_item->month, &(timestr[4]), 3);
 		ft_strncpy(l_item->date, &(timestr[8]), 2);
-		if (l_item->lstats.st_mtimespec.tv_sec < (time(NULL) - 15724800))
+		if (l_item->lstats.st_mtimespec.tv_sec < (time(NULL) - 15724800) ||\
+			l_item->lstats.st_mtimespec.tv_sec > time(NULL))
 			ft_strncpy(l_item->tiye, &(timestr[20]), 4);
 		else
 			ft_strncpy(l_item->tiye, &(timestr[11]), 5);
@@ -77,8 +78,8 @@ void		ft_conv_info_to_str(t_file_info *l_item)
 		str = ft_itoa(l_item->lstats.st_nlink);
 		ft_strncpy(l_item->links, str, 8);
 		free(str);
-		str = ft_itoa(l_item->lstats.st_size);
-		ft_strncpy(l_item->size, str, 8);
+		str = ft_ulltoa_base_low(l_item->lstats.st_size, 10);
+		ft_strncpy(l_item->size, str, 32);
 		free(str);
 		ft_conv_time_str(l_item);
 		l_item = l_item->next;
