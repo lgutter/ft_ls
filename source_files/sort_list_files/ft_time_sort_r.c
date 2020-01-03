@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 13:25:14 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/30 10:24:13 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 12:49:15 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ static t_file_info	*ft_swap_start_list(t_file_info **list_start)
 		(*list_start)->next = current->next;
 		current->next = *list_start;
 		*list_start = current;
+	}
+	else if (current->lstats.st_mtimespec.tv_sec ==\
+	(*list_start)->lstats.st_mtimespec.tv_sec)
+	{
+		if (current->lstats.st_mtimespec.tv_nsec <\
+		(*list_start)->lstats.st_mtimespec.tv_nsec)
+		{
+			(*list_start)->next = current->next;
+			current->next = *list_start;
+			*list_start = current;
+		}
 	}
 	return (*list_start);
 }
