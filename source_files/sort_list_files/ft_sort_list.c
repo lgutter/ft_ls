@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:49:18 by lgutter        #+#    #+#                */
-/*   Updated: 2020/01/03 12:37:51 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 15:57:35 by ivan-tey      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ static int	ft_check_time_rev(t_file_info *current)
 			if ((current->next)->lstats.st_mtimespec.tv_nsec <\
 				current->lstats.st_mtimespec.tv_nsec)
 				return (-1);
+			else if ((current->next)->lstats.st_mtimespec.tv_nsec ==\
+					current->lstats.st_mtimespec.tv_nsec)
+			{
+				if (ft_strcmp(current->path, (current->next)->path) < 0)
+					return (-1);
+			}
 		}
 		current = current->next;
 	}
@@ -75,6 +81,12 @@ static int	ft_check_time_sort(t_file_info *current, t_options options)
 				if ((current->next)->lstats.st_mtimespec.tv_nsec >\
 					current->lstats.st_mtimespec.tv_nsec)
 					return (-1);
+				else if ((current->next)->lstats.st_mtimespec.tv_nsec ==\
+					current->lstats.st_mtimespec.tv_nsec)
+				{
+					if (ft_strcmp(current->path, (current->next)->path) > 0)
+						return (-1);
+				}
 			}
 			current = current->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 13:25:14 by lgutter        #+#    #+#                */
-/*   Updated: 2020/01/03 12:49:15 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 15:49:31 by ivan-tey      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ static int			ft_checktime(t_file_info *one, t_file_info *two)
 			two->lstats.st_mtimespec.tv_nsec)
 		{
 			return (1);
+		}
+		else if(one->lstats.st_mtimespec.tv_nsec ==\
+			two->lstats.st_mtimespec.tv_nsec)
+		{
+			if (ft_strcmp(two->path, one->path) < 0)
+				return (1);
 		}
 	}
 	return (0);
