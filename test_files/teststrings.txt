@@ -59,4 +59,4 @@ source_files Makefile ft_ls.h
 -la link_to_git
 -l ft_printf
 -latr /sgoinfre
--latrR /private/var
+-arR /private/var
