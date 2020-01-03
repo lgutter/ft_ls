@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/30 12:24:33 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 15:06:58 by ivan-tey      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ typedef struct			s_field_width
 	size_t				date;
 	size_t				blocks;
 }						t_width;
+
+/*
+**	Global variable for exit code
+*/
+
+extern int	g_exit_code;
 
 /*
 **	Core functions
