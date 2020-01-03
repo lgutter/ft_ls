@@ -6,7 +6,7 @@
 #    By: lgutter <lgutter@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/09/11 13:40:17 by lgutter        #+#    #+#                 #
-#    Updated: 2019/12/30 18:32:06 by ivan-tey      ########   odam.nl          #
+#    Updated: 2020/01/03 11:38:07 by ivan-tey      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,6 @@ $(LIBFT): FORCE
 	@$(CC) -c $< $(CFLAGS) $(INCLPATH) -o $@
 	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 	@echo "$(C_OBJECTS)$@ compiled$(C_RESET)"
-	@echo "$(C_LINES)- - - - - - - - - -$(C_RESET)"
 
 $(TEST): $(OBJECTS) $(NAME) $(TESTOBJECTS)
 	@$(MAKE) norm

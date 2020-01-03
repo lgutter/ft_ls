@@ -11,11 +11,11 @@ utility_files/ft_check_need_stats\
 find_files/ft_find_options\
 list_files/ft_stats_to_list\
 list_files/ft_conv_info_to_str\
-list_files/ft_lex_sort\
-list_files/ft_lex_sort_r\
-list_files/ft_time_sort\
-list_files/ft_time_sort_r\
-list_files/ft_sort_list\
 list_files/ft_rec_dir\
 list_files/ft_free_list\
+sort_list_files/ft_lex_sort\
+sort_list_files/ft_lex_sort_r\
+sort_list_files/ft_time_sort\
+sort_list_files/ft_time_sort_r\
+sort_list_files/ft_sort_list\
 ft_ls\
