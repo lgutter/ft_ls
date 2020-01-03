@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:18:01 by lgutter        #+#    #+#                */
-/*   Updated: 2019/12/30 11:05:45 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 14:50:46 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		ft_print_info(t_file_info *item, t_width *width,\
 
 static int		ft_check_print(t_file_info *l_item, t_options options)
 {
-	if ((options & e_args) == 0 && ft_is_dir(l_item->path) == 0)
+	if ((options & e_args) == 0 && ft_is_dir(l_item->path, options) == 0)
 	{
 		return (1);
 	}

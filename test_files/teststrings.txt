@@ -60,4 +60,9 @@ source_files Makefile ft_ls.h
 -l ft_printf
 -la /sgoinfre/lgutter
 -laR /etc
-
+-a test_files/files_for_tests/bar
+-la test_files/files_for_tests/bar
+-a test_files/files_for_tests/link1
+-a test_files/files_for_tests
+-tra test_files/files_for_tests
+-taR test_files/files_for_tests
