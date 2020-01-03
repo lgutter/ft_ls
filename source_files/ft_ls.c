@@ -6,7 +6,7 @@
 /*   By: lgutter <lgutter@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 11:53:01 by lgutter        #+#    #+#                */
-/*   Updated: 2020/01/03 14:50:42 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 15:36:28 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,19 @@ static void	ft_handle_list(t_file_info **list_start, t_options options, int fc)
 	}
 }
 
+/*
+**	Declaration of the global variable g_exit_code
+*/
+
+int			g_exit_code;
+
 int			ft_ls(int filecount, char **filenames, t_options options)
 {
 	t_file_info		*current;
 	int				i;
 
 	i = 0;
+	g_exit_code = 0;
 	current = NULL;
 	while (i < filecount)
 	{
@@ -47,5 +54,5 @@ int			ft_ls(int filecount, char **filenames, t_options options)
 	ft_handle_list(&current, options, filecount);
 	if (current != NULL)
 		ft_free_list(&current);
-	return (0);
+	return (g_exit_code);
 }
