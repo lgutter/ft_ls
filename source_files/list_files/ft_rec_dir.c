@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 12:35:11 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/30 12:25:16 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 14:50:44 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		ft_print_cur_dir(char dirname[PATH_MAX + 1])
 
 static int		ft_check_rec(t_file_info *current, t_options options)
 {
-	if (ft_is_dir(current->path) == 0)
+	if (ft_is_dir(current->path, options) == 0)
 	{
 		return (-1);
 	}

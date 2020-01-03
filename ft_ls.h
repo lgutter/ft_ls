@@ -6,7 +6,7 @@
 /*   By: ivan-tey <ivan-tey@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 11:33:09 by ivan-tey       #+#    #+#                */
-/*   Updated: 2019/12/30 12:24:33 by lgutter       ########   odam.nl         */
+/*   Updated: 2020/01/03 15:36:20 by lgutter       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ typedef struct			s_field_width
 }						t_width;
 
 /*
+**	Global variable for exit code
+*/
+
+extern int	g_exit_code;
+
+/*
 **	Core functions
 */
 
@@ -144,7 +150,7 @@ void					ft_print_opt_error(char option);
 void					ft_print_usage(void);
 void					*ft_error_free(void **memory);
 size_t					ft_strlonger(size_t other_len, char *str);
-int						ft_is_dir(char *filename);
+int						ft_is_dir(char *filename, t_options options);
 int						ft_path_expand(char dest[PATH_MAX + 1],\
 						char path[PATH_MAX + 1], char *addition,\
 										t_options options);
